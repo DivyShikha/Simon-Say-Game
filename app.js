@@ -19,6 +19,23 @@ document.addEventListener("keypress", function(){
     }
 });
 
+function levelUp(){
+    userSeq = [];
+    level++;
+   
+    h2.innerText = `Level ${level}`;
+
+    //random btn choose
+    let randIdx = Math.floor(Math.random()*4);
+    let randColor = btns[randIdx];
+    let randBtn = document.querySelector(`.${randColor}`);
+
+    gameSeq.push(randColor);
+    console.log(gameSeq);
+    gameFlash(randBtn);
+    
+}
+
 function gameFlash(btn){//white flash
     btn.classList.add("flash");
     setTimeout(function(){
@@ -33,24 +50,7 @@ function userFlash(btn){//green flash
     }, 250);
 }
 
-function levelUp(){
-    userSeq = [];
-    level++;
 
-    //flash button to indicate start of a new level
-   
-    h2.innerText = `Level ${level}`;
-
-    //random btn choose
-    let randIdx = Math.floor(Math.random()*4);
-    let randColor = btns[randIdx];
-    let randBtn = document.querySelector(`.${randColor}`);
-
-    gameSeq.push(randColor);
-    console.log(gameSeq);
-    gameFlash(randBtn);
-    
-}
 
 function checkAns(idx){
    //console.log("curr level : ", level);
@@ -70,7 +70,7 @@ function checkAns(idx){
         
         setTimeout(function(){
             document.querySelector("body").style.backgroundColor = "white";
-        }, 150);
+        }, 700);
         reset();
     }
 }
@@ -86,7 +86,9 @@ function btnPress (){
     checkAns(userSeq.length-1);
 
 }
+
 let allBtns = document.querySelectorAll(".btn");
+
 for(btn of allBtns){
     btn.addEventListener("click", btnPress);
 }
